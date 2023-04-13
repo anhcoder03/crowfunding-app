@@ -1,22 +1,47 @@
+import useToggleValue from "hooks/useToggleValue";
 import React from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import LayoutAuthentication from "layout/LayoutAuthentication";
-import { Label } from "components/label";
 import Input from "components/input/Input";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { Label } from "components/label";
+import { IconEyeToggle } from "components/icons";
 import { Field } from "components/field";
+import { Checkbox } from "components/checkbox";
 import { Button } from "components/button";
 
 const SignUpPage = () => {
+  const schema = yup
+    .object({
+      name: yup.string().required("This field is required"),
+      email: yup
+        .string()
+        .email("Invalid email address")
+        .required("This field is required"),
+      password: yup
+        .string()
+        .required("This field is required")
+        .min(8, "Password must be 8 character "),
+    })
+    .required();
   const {
     handleSubmit,
     control,
-    formState: { isValid },
-  } = useForm({});
+    formState: { isValid, isSubmitting, errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onSubmit",
+  });
   const handleSignUp = (values) => {
     console.log(values);
     if (!isValid) return;
   };
+  const { value: acceptTerm, handleToggleValue: handleToggleTerm } =
+    useToggleValue();
+  const { value: showPassword, handleToggleValue: handleShowPassword } =
+    useToggleValue();
   return (
     <LayoutAuthentication heading="Sign Up">
       <p className="mb-6 text-xs font-normal text-center lg:mb-8 lg:text-sm text-text3">
@@ -37,7 +62,12 @@ const SignUpPage = () => {
       <form onSubmit={handleSubmit(handleSignUp)}>
         <Field>
           <Label htmlFor="name">Full Name *</Label>
-          <Input name="name" placeholder="Jhon Doe" control={control}></Input>
+          <Input
+            name="name"
+            placeholder="Jhon Doe"
+            control={control}
+            error={errors.name?.message}
+          ></Input>
         </Field>
         <Field>
           <Label htmlFor="email">Email *</Label>
@@ -45,27 +75,40 @@ const SignUpPage = () => {
             name="email"
             placeholder="example@gmail.com"
             control={control}
+            error={errors.email?.message}
           ></Input>
         </Field>
         <Field>
           <Label htmlFor="password">Password *</Label>
           <Input
             name="password"
-            type="password"
+            type={`${showPassword ? "text" : "password"}`}
             placeholder="Create a password"
             control={control}
-          ></Input>
+            error={errors.password?.message}
+          >
+            <IconEyeToggle
+              onClick={handleShowPassword}
+              open={showPassword}
+            ></IconEyeToggle>
+          </Input>
         </Field>
         <div className="flex items-start mb-6 gap-x-5 lg:mb-5">
-          <span className="inline-block w-5 h-5 border rounded border-text4"></span>
-          <p className="flex-1 text-sm text-text2">
-            I agree to the{" "}
-            <span className="underline text-secondary">Terms of Use</span> and
-            have read and understand the{" "}
-            <span className="underline text-secondary">Privacy policy</span>.
-          </p>
+          <Checkbox onClick={handleToggleTerm} checked={acceptTerm} name="term">
+            <p className="flex-1 text-sm text-text2">
+              I agree to the{" "}
+              <span className="underline text-secondary">Terms of Use</span> and
+              have read and understand the{" "}
+              <span className="underline text-secondary">Privacy policy</span>.
+            </p>
+          </Checkbox>
         </div>
-        <Button type="submit" className="w-full bg-primary">
+        <Button
+          type="submit"
+          className="w-full bg-primary"
+          disabled={isSubmitting}
+          isLoading={isSubmitting}
+        >
           Create my account
         </Button>
       </form>
