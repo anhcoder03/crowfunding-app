@@ -23,8 +23,10 @@ const Input = ({
     <div className="relative">
       <input
         type={type}
-        className={`w-full px-6 py-4 text-sm font-medium border  text-text1 rounded-xl  placeholder:text-text4 ${
-          error.length > 0 ? "border-error" : "border-strock"
+        className={`w-full px-6 py-4 text-sm font-medium border dark:bg-transparent dark:text-white dark:placeholder:text-text2    rounded-xl  placeholder:text-text4 ${
+          error.length > 0
+            ? "border-error text-error"
+            : "border-strock dark:border-darkStroke text-text1"
         } ${children ? "pr-16" : ""}
          ${className}`}
         id={name}

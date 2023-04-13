@@ -50,13 +50,11 @@ const SignUpPage = () => {
           Sign in
         </Link>
       </p>
-      <button className="flex justify-center w-full py-4 mb-5 border rounded-lg gap-x-3 iten-center border-strock">
+      <button className="flex justify-center w-full py-4 mb-5 text-base font-semibold border rounded-lg gap-x-3 iten-center text-text2 border-strock dark:border-darkStroke dark:text-white">
         <img srcSet="/google.png 2x" alt="icon-google" />
-        <span className="text-base font-semibold text-text2">
-          Sign up with google
-        </span>
+        <span>Sign up with google</span>
       </button>
-      <p className="mb-4 text-xs text-center lg:text-sm text-text2 lg:mb-8">
+      <p className="mb-4 text-xs text-center lg:text-sm text-text2 lg:mb-8 dark:text-white">
         Or sign up with email
       </p>
       <form onSubmit={handleSubmit(handleSignUp)}>
@@ -95,7 +93,7 @@ const SignUpPage = () => {
         </Field>
         <div className="flex items-start mb-6 gap-x-5 lg:mb-5">
           <Checkbox onClick={handleToggleTerm} checked={acceptTerm} name="term">
-            <p className="flex-1 text-sm text-text2">
+            <p className="flex-1 text-xs lg:text-sm text-text2 dark:text-text3">
               I agree to the{" "}
               <span className="underline text-secondary">Terms of Use</span> and
               have read and understand the{" "}
