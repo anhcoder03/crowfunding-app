@@ -13,7 +13,7 @@ module.exports = {
         text2: "#4B5264",
         text3: "#808191",
         text4: "#B2B3BD",
-        "icon-color": "#A2A2A",
+        iconColor: "#A2A2A2",
         white: "#FFFFFF",
         whiteSoft: "#FCFBFF",
         graySoft: "#FCFCFC",
@@ -26,6 +26,9 @@ module.exports = {
         darkSoft: "#24242C",
         darkStroke: "#3A3A43",
         darkRed: "#422C32",
+      },
+      boxShadow: {
+        shadow1: "10px 10px 20px rgba(211, 211, 211, 0.25)",
       },
     },
   },
