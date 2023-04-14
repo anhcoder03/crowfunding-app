@@ -39,27 +39,31 @@ const sidebarLinks = [
   {
     icon: <IconLogout></IconLogout>,
     title: "Logout",
-    url: "#",
+    url: "/abc",
     onClick: () => {},
   },
   {
     icon: <IconLight></IconLight>,
     title: "Light/Dark",
-    url: "#",
+    url: "/abc",
     onClick: () => {},
   },
 ];
 
 const DashboardSidebar = () => {
+  const navlinkClass =
+    "flex items-center gap-x-5 md:w-12 md:h-12 md:justify-center md:rounded-lg md:mb-8 text-iconColor last:mt-auto last:bg-white last:shadow-shadow1";
   return (
     <div className="w-full md:w-[76px] px-[14px] flex-shrink-0 py-10 shadow-[10px_10px_20px_rgba(218,_213,_213,_0.15)] bg-white rounded-3xl flex flex-col">
       {sidebarLinks.map((link) => (
         <NavLink
           to={link.url}
           key={link.title}
-          className={`flex items-center gap-x-5 md:w-12 md:h-12 md:justify-center md:rounded-lg md:mb-8 text-iconColor last:mt-auto last:bg-white last:shadow-shadow1 ${({
-            isActive,
-          }) => (isActive ? "bg-primary" : "")}`}
+          className={({ isActive }) =>
+            isActive
+              ? `${navlinkClass} bg-primary text-primary bg-opacity-20`
+              : navlinkClass
+          }
         >
           <span>{link.icon}</span>
           <span className="md:hidden">{link.title}</span>

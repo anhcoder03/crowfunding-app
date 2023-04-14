@@ -1,6 +1,4 @@
-import { IconFolder } from "components/icons";
 import React from "react";
-import { Link } from "react-router-dom";
 import CampCategory from "./partials/CampCategory";
 import CampMeta from "./partials/CampMeta";
 import CampDesc from "./partials/CampDesc";

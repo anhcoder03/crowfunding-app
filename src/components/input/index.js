@@ -1,3 +1,1 @@
-import { Input } from "postcss";
-
-export { Input };
+export const { default: Input } = require("./Input");

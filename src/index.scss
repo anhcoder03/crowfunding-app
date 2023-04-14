@@ -4,6 +4,9 @@
 @layer base {
   body {
     @apply font-primary text-base leading-6 font-normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   input {
     @apply outline-none;
